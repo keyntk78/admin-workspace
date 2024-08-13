@@ -59,20 +59,20 @@ const NextBreadcrumb = ({
                 ? link[0].toUpperCase() + link.slice(1, link.length)
                 : link;
               return (
-                <>
+                <div key={index}>
                   {paths === href ? (
-                    <BreadcrumbPage key={index}>{itemLink}</BreadcrumbPage>
+                    <BreadcrumbPage>{itemLink}</BreadcrumbPage>
                   ) : (
                     <>
-                      <BreadcrumbItem key={index}>
+                      <BreadcrumbItem>
                         <BreadcrumbLink href={href}>{itemLink}</BreadcrumbLink>
                       </BreadcrumbItem>
                       {pathNames.length !== index + 1 && (
-                        <BreadcrumbSeparator key={index} />
+                        <BreadcrumbSeparator />
                       )}
                     </>
                   )}
-                </>
+                </div>
               );
             })}
         </BreadcrumbList>

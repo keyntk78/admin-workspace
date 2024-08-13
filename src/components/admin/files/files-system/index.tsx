@@ -15,6 +15,10 @@ import {
 } from "@dnd-kit/core";
 import { snapCenterToCursor } from "@dnd-kit/modifiers";
 import { useRouter } from "next/navigation";
+import { ArrowUp } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import SortFile from "../sort-files";
+import FileActions from "../file-actions";
 
 export default function FileSystem() {
   const [isDrag, setIsDrag] = useState<boolean>(false);
@@ -22,6 +26,7 @@ export default function FileSystem() {
   const [foldersSelected, setFoldersSelected] = useState<string[]>([]);
   const [filesSelected, setFilesSelected] = useState<string[]>([]);
   const [showFileDetail, setShowFileDetail] = useState(false);
+
   const router = useRouter();
 
   const sensors = useSensors(
@@ -83,13 +88,17 @@ export default function FileSystem() {
 
   return (
     <div className="pt-6">
-      <h1 className="font-bold text-[20px]">Folder</h1>
+      <FileActions />
       <DndContext
         sensors={sensors}
         onDragStart={handleDragStart}
         onDragEnd={handleDragEnd}
         modifiers={[snapCenterToCursor]}
       >
+        <div className="flex justify-between items-center">
+          <h1 className="font-bold text-[20px]">Folders</h1>
+          <SortFile />
+        </div>
         <div className="grid grid-cols-4 gap-4 mt-4">
           {folders.map((folder) => (
             <FolderItem
